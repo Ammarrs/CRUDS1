@@ -17,11 +17,11 @@
       <div class="input"> 
         <input id="title" type="text" placeholder="title" />
         <div class="price">
-          <input type="number" id="price" placeholder="price">
-          <input type="number" id="taxes" placeholder="taxes">
-          <input type="number" id="ads" placeholder="ads">
-          <input type="number" id="discount" placeholder="discount">
-          <small id="total">123</small>
+          <input onkeyup="calcTotal()" type="number" id="price" placeholder="price">
+          <input onkeyup="calcTotal()" type="number" id="taxes" placeholder="taxes">
+          <input onkeyup="calcTotal()" type="number" id="ads" placeholder="ads">
+          <input onkeyup="calcTotal()" type="number" id="discount" placeholder="discount">
+          <small id="total"></small>
         </div>
         <input type="number" id="count" placeholder="count"/>
         <input type="text" placeholder="category" id="category"/>
