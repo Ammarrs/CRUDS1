@@ -8,7 +8,7 @@ let count = document.getElementById('count');
 let category = document.getElementById('category');
 let submit = document.getElementById('submit');
 
-console.log(title, price, tax, ads, discount, count, category, submit);
+// console.log(title, price, tax, ads, discount, count, category, submit);
 
 // calc total
 
@@ -26,7 +26,41 @@ function calcTotal() {
 
 
 // cereate product
+let dataPro;
+if (localStorage.product != null) {
+  dataPro = JSON.parse(localStorage.product);
+} else {
+  dataPro = []; 
+}
+
+
+submit.onclick = () => {
+  let newPro = {
+    title: title.value,
+    price: price.value,
+    tax: tax.value,
+    ads: ads.value,
+    discount: discount.value,
+    total: total.innerHTML,
+    count: count.value,
+    category: category.value,
+  }
+  
+  dataPro.push(newPro);
+  localStorage.setItem('product', JSON.stringify(dataPro));
+  console.log(dataPro);
+}
+
+
+
 // save data on local storage
+
+// here if i want to saving data obect by object
+// for(let obj of dataPro) {
+//   localStorage.setItem(obj);
+// }
+
+
 // clear data after create
 // read
 // count
