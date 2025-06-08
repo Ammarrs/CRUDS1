@@ -48,7 +48,10 @@ submit.onclick = () => {
   
   dataPro.push(newPro);
   localStorage.setItem('product', JSON.stringify(dataPro));
-  console.log(dataPro);
+  // console.log(dataPro);
+
+  showData();
+  clearData();
 }
 
 
@@ -62,9 +65,66 @@ submit.onclick = () => {
 
 
 // clear data after create
+
+function clearData() {
+  title.value = '';
+  price.value = '';
+  tax.value = '';
+  ads.value = '';
+  discount.value = '';
+  count.value = '';
+  category.value = '';
+  total.innerHTML = '';
+}
+
+
 // read
-// count
+
+function showData() {
+  let table = '';
+  for (let i = 0; i < dataPro.length; i++) {
+    table += `
+      <tr>
+        <td>${i}</td>
+        <td>${dataPro[i].title}</td>
+        <td>${dataPro[i].price}</td>
+        <td>${dataPro[i].tax}</td>
+        <td>${dataPro[i].ads}</td>
+        <td>${dataPro[i].discount}</td>
+        <td>${dataPro[i].category}</td>
+        <td><button id="update">update</button></td>
+        <td><button onclick="deleteData(${i})" id="delete">delete</button>
+        </td>
+      </tr>
+    `;
+
+    document.getElementById('tbody').innerHTML = table;
+  }
+}
+
+showData();
+
+
 // delete
+
+function deleteData(i) {
+  console.log(i);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// count
 // update
 // search
 // clean data
