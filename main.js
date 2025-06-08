@@ -34,7 +34,7 @@ if (localStorage.product != null) {
 }
 
 
-submit.onclick = () => {
+ function sub() {
   let newPro = {
     title: title.value,
     price: price.value,
