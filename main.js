@@ -46,7 +46,14 @@ if (localStorage.product != null) {
     category: category.value,
   }
   
-  dataPro.push(newPro);
+  if (newPro.count > 1) {
+    for (let i = 0; i < newPro.count; i++) {
+      dataPro.push(newPro);
+    } 
+  }else {
+    dataPro.push(newPro);
+  }
+
   localStorage.setItem('product', JSON.stringify(dataPro));
   // console.log(dataPro);
 
@@ -97,9 +104,16 @@ function showData() {
         </td>
       </tr>
     `;
-
+    }
     document.getElementById('tbody').innerHTML = table;
-  }
+
+    let deleteAllBtn = document.getElementById('deleteAll');
+    if(dataPro.length > 0) {
+      deleteAllBtn.innerHTML = `<button onclick="deleteAll()">Delete All (${dataPro.length})</button>`;
+    }else {
+      deleteAllBtn.innerHTML = ``;
+    }
+  
 }
 
 showData();
@@ -115,19 +129,25 @@ function deleteData(i) {
 }
 
 
+// delete all
 
-
-
-
-
-
-
-
+function deleteAll() {
+  localStorage.clear();
+  dataPro.splice(0);
+  showData();
+}
 
 
 
 
 // count
+
+
+
+
+
+
+
 // update
 // search
 // clean data

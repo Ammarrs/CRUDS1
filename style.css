@@ -77,6 +77,15 @@ button:hover {
   width: 45%;
 }
 
+#deleteAll {
+  margin: 20px 0;
+}
+
+input::placeholder {
+  font-size: 18px;
+  
+}
+
 table {
   width: 100%;
   text-align: center;
