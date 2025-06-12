@@ -8,6 +8,9 @@ let count = document.getElementById('count');
 let category = document.getElementById('category');
 let submit = document.getElementById('submit');
 
+let mood = 'create';
+let temp;
+
 // console.log(title, price, tax, ads, discount, count, category, submit);
 
 // calc total
@@ -46,12 +49,19 @@ if (localStorage.product != null) {
     category: category.value,
   }
   
-  if (newPro.count > 1) {
-    for (let i = 0; i < newPro.count; i++) {
+  if (mood === "create") {
+    if (newPro.count > 1) {
+      for (let i = 0; i < newPro.count; i++) {
+        dataPro.push(newPro);
+      } 
+    } else {
       dataPro.push(newPro);
-    } 
-  }else {
-    dataPro.push(newPro);
+    }
+  } else {
+    dataPro[temp] = newPro;
+    mood = "create";
+    submit.innerHTML = "Create";
+    count.style.display = "block";
   }
 
   localStorage.setItem('product', JSON.stringify(dataPro));
@@ -65,7 +75,7 @@ if (localStorage.product != null) {
 
 // save data on local storage
 
-// here if i want to saving data obect by object
+// here if i want to saving data object by object
 // for(let obj of dataPro) {
 //   localStorage.setItem(obj);
 // }
@@ -82,6 +92,7 @@ function clearData() {
   count.value = '';
   category.value = '';
   total.innerHTML = '';
+  calcTotal();
 }
 
 
@@ -99,21 +110,20 @@ function showData() {
         <td>${dataPro[i].ads}</td>
         <td>${dataPro[i].discount}</td>
         <td>${dataPro[i].category}</td>
-        <td><button id="update">update</button></td>
+        <td><button onclick="updateData(${i})" id="update">update</button></td>
         <td><button onclick="deleteData(${i})" id="delete">delete</button>
         </td>
       </tr>
     `;
-    }
-    document.getElementById('tbody').innerHTML = table;
+  }
+  document.getElementById('tbody').innerHTML = table;
 
-    let deleteAllBtn = document.getElementById('deleteAll');
-    if(dataPro.length > 0) {
-      deleteAllBtn.innerHTML = `<button onclick="deleteAll()">Delete All (${dataPro.length})</button>`;
-    }else {
-      deleteAllBtn.innerHTML = ``;
-    }
-  
+  let deleteAllBtn = document.getElementById('deleteAll');
+  if(dataPro.length > 0) {
+    deleteAllBtn.innerHTML = `<button onclick="deleteAll()">Delete All (${dataPro.length})</button>`;
+  }else {
+    deleteAllBtn.innerHTML = ``;
+  }
 }
 
 showData();
@@ -138,17 +148,41 @@ function deleteAll() {
 }
 
 
-
-
-// count
-
-
-
-
-
-
-
 // update
+
+function updateData(i) {
+  fillData(i);
+  count.style.display = "none";
+  submit.innerHTML = "Update";
+  mood = "update";
+  temp = i;
+  scroll({
+    top: 0,
+    behavior:"smooth"
+  })
+}
+
+function fillData(i) {
+  title.value = dataPro[i].title;
+  price.value = dataPro[i].price;
+  tax.value = dataPro[i].tax;
+  ads.value = dataPro[i].ads;
+  discount.value = dataPro[i].discount;
+  category.value = dataPro[i].category;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 // search
 // clean data
 
